@@ -34,4 +34,16 @@ class HomeCubit extends Cubit<HomeState> {
       emit(CountUpdateFail(count: state.count));
     }
   }
+
+  resetCount() async {
+    emit(CountUpdateInLoading(count: state.count));
+
+    try {
+      final newCount = await _countingRepository.resetCount(count: state.count);
+
+      emit(CountUpdateSuccess(count: newCount));
+    } catch (e) {
+      emit(CountUpdateFail(count: state.count));
+    }
+  }
 }
