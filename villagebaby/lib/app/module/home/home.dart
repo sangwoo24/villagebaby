@@ -27,11 +27,7 @@ class Home extends StatelessWidget {
       builder: (context, state) {
         return FloatingActionButton(
           backgroundColor: Colors.white,
-          onPressed: () {
-            if (state is! CountUpdateInLoading) {
-              context.read<HomeCubit>().resetCount();
-            }
-          },
+          onPressed: () => context.read<HomeCubit>().resetCount(),
           child: const Icon(
             Icons.refresh,
             size: 25,
@@ -73,20 +69,12 @@ class Home extends StatelessWidget {
               children: [
                 CountingButton(
                   icon: const Icon(Icons.remove),
-                  onPressed: () {
-                    if (state is! CountUpdateInLoading) {
-                      context.read<HomeCubit>().decreaseCount();
-                    }
-                  },
+                  onPressed: () => context.read<HomeCubit>().decreaseCount(),
                 ),
                 const SizedBox(width: 100),
                 CountingButton(
                   icon: const Icon(Icons.add),
-                  onPressed: () {
-                    if (state is! CountUpdateInLoading) {
-                      context.read<HomeCubit>().increaseCount();
-                    }
-                  },
+                  onPressed: () => context.read<HomeCubit>().increaseCount(),
                 ),
               ],
             ),
