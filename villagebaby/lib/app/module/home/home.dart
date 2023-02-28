@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:villagebaby/app/global/components/counting_button.dart';
@@ -26,12 +27,24 @@ class Home extends StatelessWidget {
         return Column(
           children: [
             const Spacer(flex: 2),
-            Text(
-              '${state.count}',
-              style: const TextStyle(
-                fontSize: 80,
-                fontWeight: FontWeight.bold,
-              ),
+            Stack(
+              children: [
+                Text(
+                  '${state.count}',
+                  style: const TextStyle(
+                    fontSize: 80,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (state is CountUpdateInLoading) ...[
+                  const Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: CupertinoActivityIndicator(),
+                    ),
+                  ),
+                ],
+              ],
             ),
             const SizedBox(height: 50),
             Row(
