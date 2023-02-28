@@ -8,6 +8,10 @@ class InitialState extends HomeState {
   InitialState({required super.count});
 }
 
+class CountUpdateInLoading extends HomeState {
+  CountUpdateInLoading({required super.count});
+}
+
 class CountUpdateSuccess extends HomeState {
   CountUpdateSuccess({required super.count});
 }

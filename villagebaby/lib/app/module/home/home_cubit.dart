@@ -10,6 +10,8 @@ class HomeCubit extends Cubit<HomeState> {
   final CountingRepository _countingRepository;
 
   increaseCount() async {
+    emit(CountUpdateInLoading(count: state.count));
+
     try {
       final newCount =
           await _countingRepository.increaseCount(count: state.count);
@@ -21,6 +23,8 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   decreaseCount() async {
+    emit(CountUpdateInLoading(count: state.count));
+
     try {
       final newCount =
           await _countingRepository.decreaseCount(count: state.count);

@@ -39,12 +39,20 @@ class Home extends StatelessWidget {
               children: [
                 CountingButton(
                   icon: const Icon(Icons.remove),
-                  onPressed: () => context.read<HomeCubit>().decreaseCount(),
+                  onPressed: () {
+                    if (state is! CountUpdateInLoading) {
+                      context.read<HomeCubit>().decreaseCount();
+                    }
+                  },
                 ),
                 const SizedBox(width: 100),
                 CountingButton(
                   icon: const Icon(Icons.add),
-                  onPressed: () => context.read<HomeCubit>().increaseCount(),
+                  onPressed: () {
+                    if (state is! CountUpdateInLoading) {
+                      context.read<HomeCubit>().increaseCount();
+                    }
+                  },
                 ),
               ],
             ),
