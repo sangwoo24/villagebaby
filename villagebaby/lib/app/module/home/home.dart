@@ -17,7 +17,28 @@ class Home extends StatelessWidget {
       ),
       child: Scaffold(
         body: _body(),
+        floatingActionButton: _floatingButton(),
       ),
+    );
+  }
+
+  Widget _floatingButton() {
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        return FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+            if (state is! CountUpdateInLoading) {
+              context.read<HomeCubit>().resetCount();
+            }
+          },
+          child: const Icon(
+            Icons.refresh,
+            size: 25,
+            color: Colors.black,
+          ),
+        );
+      },
     );
   }
 
