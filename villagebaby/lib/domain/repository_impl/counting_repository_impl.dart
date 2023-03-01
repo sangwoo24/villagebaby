@@ -10,17 +10,17 @@ class CountingRepositoryImpl extends CountingRepository {
   }
 
   @override
-  Future<int> increaseCount({required int count}) {
-    return _countingProvider.increaseCount(count: count);
+  Future<int> increaseCount({required int count}) async {
+    return await _countingProvider.increaseCount(count: count);
   }
 
   @override
   Future<int> decreaseCount({required int count}) async {
-    return _countingProvider.decreaseCount(count: count);
+    return await _countingProvider.decreaseCount(count: count);
   }
 
   @override
-  Future<int> resetCount({required int count}) {
-    return _countingProvider.resetCount(count: count);
+  Future<int> resetCount({required int count}) async {
+    return await _countingProvider.resetCount(count: count);
   }
 }
