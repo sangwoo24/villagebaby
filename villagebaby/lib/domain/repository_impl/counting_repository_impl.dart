@@ -5,6 +5,11 @@ class CountingRepositoryImpl extends CountingRepository {
   final CountingProvider _countingProvider = CountingProvider();
 
   @override
+  Future<int> fetchCount() async {
+    return await _countingProvider.fetchCount() ?? 0;
+  }
+
+  @override
   Future<int> increaseCount({required int count}) {
     return _countingProvider.increaseCount(count: count);
   }
