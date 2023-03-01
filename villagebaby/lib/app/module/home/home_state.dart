@@ -1,21 +1,21 @@
-abstract class HomeState {
+abstract class HomeState {}
+
+class InitialState extends HomeState {}
+
+class CountLoaded extends HomeState {
   final int count;
 
-  HomeState({required this.count});
+  CountLoaded({required this.count});
 }
 
-class InitialState extends HomeState {
-  InitialState({required super.count});
-}
-
-class CountUpdateInLoading extends HomeState {
+class CountUpdateInLoading extends CountLoaded {
   CountUpdateInLoading({required super.count});
 }
 
-class CountUpdateSuccess extends HomeState {
+class CountUpdateSuccess extends CountLoaded {
   CountUpdateSuccess({required super.count});
 }
 
-class CountUpdateFail extends HomeState {
+class CountUpdateFail extends CountLoaded {
   CountUpdateFail({required super.count});
 }

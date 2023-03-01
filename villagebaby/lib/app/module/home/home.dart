@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit(
         countingRepository: context.read<CountingRepository>(),
-      ),
+      )..fetchCount(),
       child: Scaffold(
         body: _body(),
         floatingActionButton: _floatingButton(),
@@ -41,46 +41,50 @@ class Home extends StatelessWidget {
   Widget _body() {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            const Spacer(flex: 2),
-            Stack(
-              children: [
-                Text(
-                  '${state.count}',
-                  style: const TextStyle(
-                    fontSize: 80,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                if (state is CountUpdateInLoading) ...[
-                  const Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: CupertinoActivityIndicator(),
+        if (state is CountLoaded) {
+          return Column(
+            children: [
+              const Spacer(flex: 2),
+              Stack(
+                children: [
+                  Text(
+                    '${state.count}',
+                    style: const TextStyle(
+                      fontSize: 80,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                  if (state is CountUpdateInLoading) ...[
+                    const Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: CupertinoActivityIndicator(),
+                      ),
+                    ),
+                  ],
                 ],
-              ],
-            ),
-            const SizedBox(height: 50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CountingButton(
-                  icon: const Icon(Icons.remove),
-                  onPressed: () => context.read<HomeCubit>().decreaseCount(),
-                ),
-                const SizedBox(width: 100),
-                CountingButton(
-                  icon: const Icon(Icons.add),
-                  onPressed: () => context.read<HomeCubit>().increaseCount(),
-                ),
-              ],
-            ),
-            const Spacer(flex: 3),
-          ],
-        );
+              ),
+              const SizedBox(height: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CountingButton(
+                    icon: const Icon(Icons.remove),
+                    onPressed: () => context.read<HomeCubit>().decreaseCount(),
+                  ),
+                  const SizedBox(width: 100),
+                  CountingButton(
+                    icon: const Icon(Icons.add),
+                    onPressed: () => context.read<HomeCubit>().increaseCount(),
+                  ),
+                ],
+              ),
+              const Spacer(flex: 3),
+            ],
+          );
+        }
+
+        return const Center(child: CupertinoActivityIndicator());
       },
     );
   }
